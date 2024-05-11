@@ -6,9 +6,11 @@ import by.russianzak.model.RoadSurfaceEntity;
 import by.russianzak.model.RoadSurfaceEntity.TypeOfRoadSurface;
 import by.russianzak.model.StreetEntity;
 import by.russianzak.servlet.dto.RequestStreetEntityDto;
+import by.russianzak.servlet.dto.ResponseHouseEntityDto;
 import by.russianzak.servlet.dto.ResponseStreetEntityDto;
-import by.russianzak.servlet.dto.ResponseStreetEntityDto.HouseDto;
-import by.russianzak.servlet.dto.ResponseStreetEntityDto.RoadSurfaceDto;
+import by.russianzak.servlet.dto.slim.ResponseHouseSlimDto;
+import by.russianzak.servlet.dto.slim.ResponseRoadSurfaceSlimDto;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -28,9 +30,9 @@ public class StreetEntityDtoMapperImpl implements StreetEntityDtoMapper{
     Set<RoadSurfaceEntity> roadSurfaceEntities = Optional.ofNullable(incomingDto.getRoadSurfaces())
         .map(surfaceDtos -> surfaceDtos.stream()
             .map(surfaceDto -> RoadSurfaceEntity.builder()
-                .setType(TypeOfRoadSurface.fromValue(surfaceDto.type()))
-                .setDescription(surfaceDto.description())
-                .setFrictionCoefficient(surfaceDto.frictionCoefficient())
+                .setType(TypeOfRoadSurface.fromValue(surfaceDto.getType()))
+                .setDescription(surfaceDto.getDescription())
+                .setFrictionCoefficient(surfaceDto.getFrictionCoefficient())
                 .build())
             .collect(Collectors.toSet()))
         .orElse(new HashSet<>());
@@ -38,10 +40,10 @@ public class StreetEntityDtoMapperImpl implements StreetEntityDtoMapper{
     Set<HouseEntity> houseEntities = Optional.ofNullable(incomingDto.getHouses())
         .map(houseDtos -> houseDtos.stream()
             .map(houseDto -> HouseEntity.builder()
-                .setHouseNumber(houseDto.houseNumber())
-                .setNumFloors(houseDto.numFloors())
-                .setBuildDate(houseDto.buildDate())
-                .setType(TypeOfBuilding.fromValue(houseDto.type()))
+                .setHouseNumber(houseDto.getHouseNumber())
+                .setNumFloors(houseDto.getNumFloors())
+                .setBuildDate(houseDto.getBuildDate())
+                .setType(TypeOfBuilding.fromValue(houseDto.getType()))
                 .setStreet(streetEntity)
                 .build())
             .collect(Collectors.toSet()))
@@ -55,12 +57,12 @@ public class StreetEntityDtoMapperImpl implements StreetEntityDtoMapper{
 
   @Override
   public ResponseStreetEntityDto map(StreetEntity entity) {
-    List<HouseDto> houseDtos = entity.getHouses().stream().map(house -> new HouseDto(
-        house.getId(), house.getHouseNumber(), house.getBuildDate(), house.getNumFloors(),
-        house.getType())).toList();
+    List<ResponseHouseSlimDto> houseDtos = entity.getHouses().stream().map(house -> new ResponseHouseSlimDto(
+        house.getId(), house.getHouseNumber(), (Date) house.getBuildDate(), house.getNumFloors(),
+        house.getType())).collect(Collectors.toList());
 
-    List<RoadSurfaceDto> roadSurfaceDtos = entity.getRoadSurfaces().stream().map(roadSurface -> new RoadSurfaceDto(roadSurface.getId(), roadSurface.getType(), roadSurface.getDescription(),
-        roadSurface.getFrictionCoefficient())).toList();
+    List<ResponseRoadSurfaceSlimDto> roadSurfaceDtos = entity.getRoadSurfaces().stream().map(roadSurface -> new ResponseRoadSurfaceSlimDto(roadSurface.getId(), roadSurface.getType(), roadSurface.getDescription(),
+        roadSurface.getFrictionCoefficient())).collect(Collectors.toList());
 
     return new ResponseStreetEntityDto(entity.getId(), entity.getName(), entity.getPostalCode(), houseDtos, roadSurfaceDtos);
   }

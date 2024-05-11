@@ -1,5 +1,8 @@
 package by.russianzak.servlet.dto;
 
+import by.russianzak.servlet.dto.slim.ResponseHouseSlimDto;
+import by.russianzak.servlet.dto.slim.ResponseRoadSurfaceSlimDto;
+import by.russianzak.servlet.dto.slim.ResponseStreetSlimDto;
 import java.util.Date;
 import java.util.List;
 
@@ -7,11 +10,11 @@ public class ResponseStreetEntityDto {
   private long id;
   private String name;
   private Long postalCode;
-  private List<HouseDto> houses;
-  private List<RoadSurfaceDto> roadSurfaces;
+  private List<ResponseHouseSlimDto> houses;
+  private List<ResponseRoadSurfaceSlimDto> roadSurfaces;
 
-  public ResponseStreetEntityDto(long id, String name, Long postalCode, List<HouseDto> houses,
-      List<RoadSurfaceDto> roadSurfaces) {
+  public ResponseStreetEntityDto(long id, String name, Long postalCode, List<ResponseHouseSlimDto> houses,
+      List<ResponseRoadSurfaceSlimDto> roadSurfaces) {
     this.id = id;
     this.name = name;
     this.postalCode = postalCode;
@@ -43,25 +46,20 @@ public class ResponseStreetEntityDto {
     this.postalCode = postalCode;
   }
 
-  public List<HouseDto> getHouses() {
+  public List<ResponseHouseSlimDto> getHouses() {
     return houses;
   }
 
-  public void setHouses(List<HouseDto> houses) {
+  public void setHouses(List<ResponseHouseSlimDto> houses) {
     this.houses = houses;
   }
 
-  public List<RoadSurfaceDto> getRoadSurfaces() {
+  public List<ResponseRoadSurfaceSlimDto> getRoadSurfaces() {
     return roadSurfaces;
   }
 
   public void setRoadSurfaces(
-      List<RoadSurfaceDto> roadSurfaces) {
+      List<ResponseRoadSurfaceSlimDto> roadSurfaces) {
     this.roadSurfaces = roadSurfaces;
   }
-
-  public record HouseDto(long id, String houseNumber, Date buildDate, int numFloors, String type) {}
-
-  public record RoadSurfaceDto(long id, String type, String description, double frictionCoefficient) {}
-
 }

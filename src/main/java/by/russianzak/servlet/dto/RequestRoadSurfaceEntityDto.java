@@ -1,17 +1,18 @@
 package by.russianzak.servlet.dto;
 
+import by.russianzak.servlet.dto.slim.RequestStreetSlimDto;
 import java.util.List;
 
 public class RequestRoadSurfaceEntityDto {
   private String type;
   private String description;
   private double frictionCoefficient;
-  private List<StreetDto> streets;
+  private List<RequestStreetSlimDto> streets;
 
   public RequestRoadSurfaceEntityDto(){}
 
   public RequestRoadSurfaceEntityDto(String type, String description, double frictionCoefficient,
-      List<StreetDto> streets) {
+      List<RequestStreetSlimDto> streets) {
     this.type = type;
     this.description = description;
     this.frictionCoefficient = frictionCoefficient;
@@ -42,14 +43,12 @@ public class RequestRoadSurfaceEntityDto {
     this.frictionCoefficient = frictionCoefficient;
   }
 
-  public List<StreetDto> getStreets() {
+  public List<RequestStreetSlimDto> getStreets() {
     return streets;
   }
 
   public void setStreets(
-      List<StreetDto> streets) {
+      List<RequestStreetSlimDto> streets) {
     this.streets = streets;
   }
-
-  public record StreetDto (String name, Long postalCode) {}
 }

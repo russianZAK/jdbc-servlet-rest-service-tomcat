@@ -1,6 +1,8 @@
 package by.russianzak.servlet.dto;
 
 
+import by.russianzak.servlet.dto.slim.RequestHouseSlimDto;
+import by.russianzak.servlet.dto.slim.RequestRoadSurfaceSlimDto;
 import com.google.gson.annotations.SerializedName;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -9,12 +11,12 @@ import java.util.List;
 public class RequestStreetEntityDto {
   private String name;
   private Long postalCode;
-  private List<HouseDto> houses;
-  private List<RoadSurfaceDto> roadSurfaces;
+  private List<RequestHouseSlimDto> houses;
+  private List<RequestRoadSurfaceSlimDto> roadSurfaces;
 
   public RequestStreetEntityDto() {}
 
-  public RequestStreetEntityDto(String name, Long postalCode, List<HouseDto> houses, List<RoadSurfaceDto> roadSurfaces) {
+  public RequestStreetEntityDto(String name, Long postalCode, List<RequestHouseSlimDto> houses, List<RequestRoadSurfaceSlimDto> roadSurfaces) {
     this.name = name;
     this.postalCode = postalCode;
     this.houses = houses;
@@ -37,25 +39,21 @@ public class RequestStreetEntityDto {
     this.postalCode = postalCode;
   }
 
-  public List<HouseDto> getHouses() {
+  public List<RequestHouseSlimDto> getHouses() {
     return houses;
   }
 
-  public void setHouses(List<HouseDto> houses) {
+  public void setHouses(List<RequestHouseSlimDto> houses) {
     this.houses = houses;
   }
 
-  public List<RoadSurfaceDto> getRoadSurfaces() {
+  public List<RequestRoadSurfaceSlimDto> getRoadSurfaces() {
     return roadSurfaces;
   }
 
   public void setRoadSurfaces(
-      List<RoadSurfaceDto> roadSurfaces) {
+      List<RequestRoadSurfaceSlimDto> roadSurfaces) {
     this.roadSurfaces = roadSurfaces;
   }
 
-
-  public record HouseDto(String houseNumber, Date buildDate, int numFloors, String type) {}
-
-  public record RoadSurfaceDto(String type, String description, double frictionCoefficient) {}
 }

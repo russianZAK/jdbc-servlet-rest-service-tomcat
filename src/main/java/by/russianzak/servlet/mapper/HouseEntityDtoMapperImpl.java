@@ -5,7 +5,7 @@ import by.russianzak.model.HouseEntity.TypeOfBuilding;
 import by.russianzak.model.StreetEntity;
 import by.russianzak.servlet.dto.RequestHouseEntityDto;
 import by.russianzak.servlet.dto.ResponseHouseEntityDto;
-import by.russianzak.servlet.dto.ResponseHouseEntityDto.Street;
+import by.russianzak.servlet.dto.slim.ResponseStreetSlimDto;
 
 public class HouseEntityDtoMapperImpl implements HouseEntityDtoMapper{
 
@@ -19,6 +19,6 @@ public class HouseEntityDtoMapperImpl implements HouseEntityDtoMapper{
   @Override
   public ResponseHouseEntityDto map(HouseEntity entity) {
     return new ResponseHouseEntityDto(entity.getId(), entity.getHouseNumber(), entity.getBuildDate(), entity.getNumFloors(), entity.getType(),
-        new Street(entity.getStreet().getId(), entity.getStreet().getName(), entity.getStreet().getPostalCode()));
+        new ResponseStreetSlimDto(entity.getStreet().getId(), entity.getStreet().getName(), entity.getStreet().getPostalCode()));
   }
 }

@@ -1,5 +1,6 @@
 package by.russianzak.servlet.dto;
 
+import by.russianzak.servlet.dto.slim.ResponseStreetSlimDto;
 import java.util.Date;
 
 public class ResponseHouseEntityDto {
@@ -8,10 +9,9 @@ public class ResponseHouseEntityDto {
   private Date buildDate;
   private int numFloors;
   private String type;
-  private Street street;
+  private ResponseStreetSlimDto street;
 
-  public ResponseHouseEntityDto(Long id, String houseNumber, Date buildDate, int numFloors, String type,
-      Street streetDto) {
+  public ResponseHouseEntityDto(Long id, String houseNumber, Date buildDate, int numFloors, String type, ResponseStreetSlimDto streetDto) {
     this.id = id;
     this.houseNumber = houseNumber;
     this.buildDate = buildDate;
@@ -62,14 +62,12 @@ public class ResponseHouseEntityDto {
     this.type = type;
   }
 
-  public Street getStreet() {
+  public ResponseStreetSlimDto getStreet() {
     return street;
   }
 
-  public void setStreet(Street streetId) {
+  public void setStreet(ResponseStreetSlimDto streetId) {
     this.street = streetId;
   }
-
-  public record Street(long id, String name, Long postalCode) {}
 
 }

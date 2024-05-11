@@ -1,6 +1,7 @@
 package by.russianzak.servlet.dto;
 
 import by.russianzak.model.RoadSurfaceEntity.TypeOfRoadSurface;
+import by.russianzak.servlet.dto.slim.ResponseStreetSlimDto;
 import java.util.List;
 
 public class ResponseRoadSurfaceEntityDto {
@@ -8,12 +9,12 @@ public class ResponseRoadSurfaceEntityDto {
   private String type;
   private String description;
   private double frictionCoefficient;
-  private List<StreetDto> streets;
+  private List<ResponseStreetSlimDto> streets;
 
   public ResponseRoadSurfaceEntityDto() {}
 
   public ResponseRoadSurfaceEntityDto(long id, String type, String description,
-      double frictionCoefficient, List<StreetDto> streets) {
+      double frictionCoefficient, List<ResponseStreetSlimDto> streets) {
     this.id = id;
     this.type = type;
     this.description = description;
@@ -53,14 +54,12 @@ public class ResponseRoadSurfaceEntityDto {
     this.frictionCoefficient = frictionCoefficient;
   }
 
-  public List<StreetDto> getStreets() {
+  public List<ResponseStreetSlimDto> getStreets() {
     return streets;
   }
 
   public void setStreets(
-      List<StreetDto> streets) {
+      List<ResponseStreetSlimDto> streets) {
     this.streets = streets;
   }
-
-  public record StreetDto (long id, String name, Long postalCode) {}
 }
