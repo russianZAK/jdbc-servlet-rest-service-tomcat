@@ -16,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -98,7 +99,7 @@ public class HouseEntityServlet extends HttpServlet {
         List<HouseEntity> entities = houseService.getAll();
         List<ResponseHouseEntityDto> responseDtos = entities.stream()
             .map(mapper::map)
-            .toList();
+            .collect(Collectors.toList());
         sendResponse(resp, HttpServletResponse.SC_OK, responseDtos);
       } catch (RepositoryException e) {
         sendErrorResponse(resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());

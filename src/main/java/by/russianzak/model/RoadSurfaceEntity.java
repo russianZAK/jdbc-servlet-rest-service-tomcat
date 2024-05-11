@@ -1,5 +1,6 @@
 package by.russianzak.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -64,7 +65,7 @@ public class RoadSurfaceEntity {
   }
 
   public List<StreetEntity> getStreets() {
-    return streets.stream().toList();
+    return new ArrayList<>(streets);
   }
 
   public void addStreet(StreetEntity street) {

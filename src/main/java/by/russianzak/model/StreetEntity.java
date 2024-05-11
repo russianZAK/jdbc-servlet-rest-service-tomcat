@@ -1,5 +1,6 @@
 package by.russianzak.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -40,11 +41,11 @@ public class StreetEntity {
   }
 
   public List<HouseEntity> getHouses() {
-    return houses.stream().toList();
+    return new ArrayList<>(houses);
   }
 
   public List<RoadSurfaceEntity> getRoadSurfaces() {
-    return roadSurfaces.stream().toList();
+    return new ArrayList<>(roadSurfaces);
   }
 
   public void setId(Long id) {
